@@ -1,19 +1,39 @@
-import React from 'react'
-import { DatePicker, Button, version, PageHeader } from 'antd'
-interface Props {
+import React, { createContext, useState } from 'react'
+import { Menu, Typography } from 'antd'
+import { BookOutlined, MedicineBoxOutlined, SmileOutlined } from '@ant-design/icons'
+import { optionsSteps, defaultSteps } from '../ChatBotsSteps/DefaultSteps'
+const { Title } = Typography
+interface Props { HandelChangeSteps: (NewSteps: any[]) => void }
 
-}
+export const StepsContext = createContext({ steps: optionsSteps })
 
-const ChatBots: React.FunctionComponent<Props> = (props: Props) => {
+const ChatBots: React.FunctionComponent<Props> = ({ HandelChangeSteps }: Props) => {
+    const textColor = { color: "#fff" }
+
+
     return (
-        <div>
-            <PageHeader title={version} />
-            <h1> ChatBots
-            </h1>
-            <DatePicker />
-            <Button type="primary"   >PRO</Button>
-        </div>
+        <Menu style={{ height: "100%", paddingTop: "1.2em" }} mode="inline" defaultSelectedKeys={['1']} theme="dark"
+        >
+            <Menu.Item>
+                <Title level={3} style={{ ...textColor }}>Choose Bot</Title>
+            </Menu.Item>
+            <Menu.Item key="1" icon={<SmileOutlined />} onClick={() => {
+                HandelChangeSteps(defaultSteps)
+            }
+            }>
+                Summary About You
+                            </Menu.Item>
+            <Menu.Item key="2" icon={<MedicineBoxOutlined />} onClick={() => {
+                HandelChangeSteps(optionsSteps)
+            }}>
+               Your Health State 
+                            </Menu.Item>
+            <Menu.Item key="3" icon={<BookOutlined />}>
+                Find book You need
+                            </Menu.Item>
+        </Menu>
     )
 }
 
+export const StepsContextConsumer = StepsContext.Consumer;
 export default ChatBots

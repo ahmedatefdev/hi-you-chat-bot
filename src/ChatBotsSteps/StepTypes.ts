@@ -93,3 +93,6 @@ export type UpdateStep = {
 //   update: '2',
 //   trigger: '3',
 // }
+
+type ChatStep = UpdateStep | CustomStep | TextStep | UserStep | optionsStep;
+export default ChatStep;
