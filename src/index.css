@@ -63,3 +63,7 @@ code {
   height: 100% !important;
   width: 100% !important;
 }
+.darkBackText {
+  background-color: #001529;
+  color: white;
+}

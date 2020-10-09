@@ -30,7 +30,7 @@ export type TextStep = {
 // }
 export type optionsStep = {
   id: number | string;
-  options: { value: any; label: string; trigger: string }[];
+  options: { value: any; label: string; trigger: string | number | Function }[];
   end?: boolean;
   placeholder?: string;
   hideInput?: boolean;

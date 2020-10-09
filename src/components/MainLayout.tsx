@@ -2,10 +2,10 @@ import React, { createContext } from 'react';
 import { Col, Layout, PageHeader, Row, Spin } from 'antd';
 import { ActiveChatBot } from './ActiveChatBot';
 import ChatBots from './ChatBots';
-import { optionsSteps } from '../ChatBotsSteps/DefaultSteps';
+import { PersonalitySummary } from '../ChatBotsSteps/PersonalitySummary';
 
 const { Sider, Content } = Layout;
-export const StepsContext = createContext({ steps: optionsSteps });
+export const StepsContext = createContext({ steps: PersonalitySummary });
 export default class SiderDemo extends React.Component {
     state: {
         collapsed: boolean,
@@ -19,7 +19,7 @@ export default class SiderDemo extends React.Component {
         super(props)
         this.myRef = React.createRef<HTMLDivElement>()
         this.state = {
-            collapsed: false, myRef: null, steps: optionsSteps
+            collapsed: false, myRef: null, steps: PersonalitySummary
             , reload: false
         }
         this.HandelChangeSteps = this.HandelChangeSteps.bind(this)
@@ -71,7 +71,7 @@ export default class SiderDemo extends React.Component {
                                 />
                             </Col>
                         </Row>
-                        <Content style={{ margin: '24px 0px 0', height: "100%",backgroundColor:"white" }} >
+                        <Content style={{ margin: '24px 0px 0', height: "100%", backgroundColor: "white" }} >
                             <Spin spinning={this.state.reload} style={{ height: "100% !important", width: "100% !important" }} size="large">
                                 <div className="site-layout-background" ref={this.myRef} style={{ height: "100%", width: "100%" }} >
                                     {!this.state.reload && <ActiveChatBot containerRef={this.state.myRef} />}

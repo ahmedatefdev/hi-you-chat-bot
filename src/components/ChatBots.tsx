@@ -1,16 +1,13 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext } from 'react'
 import { Menu, Typography } from 'antd'
 import { BookOutlined, MedicineBoxOutlined, SmileOutlined } from '@ant-design/icons'
-import { optionsSteps, defaultSteps } from '../ChatBotsSteps/DefaultSteps'
+import { PersonalitySummary, optionsSteps, } from '../ChatBotsSteps/PersonalitySummary'
 const { Title } = Typography
 interface Props { HandelChangeSteps: (NewSteps: any[]) => void }
 
-export const StepsContext = createContext({ steps: optionsSteps })
 
 const ChatBots: React.FunctionComponent<Props> = ({ HandelChangeSteps }: Props) => {
     const textColor = { color: "#fff" }
-
-
     return (
         <Menu style={{ height: "100%", paddingTop: "1.2em" }} mode="inline" defaultSelectedKeys={['1']} theme="dark"
         >
@@ -18,7 +15,7 @@ const ChatBots: React.FunctionComponent<Props> = ({ HandelChangeSteps }: Props) 
                 <Title level={3} style={{ ...textColor }}>Choose Bot</Title>
             </Menu.Item>
             <Menu.Item key="1" icon={<SmileOutlined />} onClick={() => {
-                HandelChangeSteps(defaultSteps)
+                HandelChangeSteps(PersonalitySummary)
             }
             }>
                 Summary About You
@@ -26,7 +23,7 @@ const ChatBots: React.FunctionComponent<Props> = ({ HandelChangeSteps }: Props) 
             <Menu.Item key="2" icon={<MedicineBoxOutlined />} onClick={() => {
                 HandelChangeSteps(optionsSteps)
             }}>
-               Your Health State 
+                Your Health State
                             </Menu.Item>
             <Menu.Item key="3" icon={<BookOutlined />}>
                 Find book You need
@@ -35,5 +32,4 @@ const ChatBots: React.FunctionComponent<Props> = ({ HandelChangeSteps }: Props) 
     )
 }
 
-export const StepsContextConsumer = StepsContext.Consumer;
 export default ChatBots

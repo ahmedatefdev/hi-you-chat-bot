@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 // @ts-ignore: Unreachable code error
 import ChatBot from 'react-simple-chatbot';
 // @ts-ignore: Unreachable code error
 import { ThemeProvider } from 'styled-components';
 import { StepsContext } from './MainLayout';
-
 const theme = {
   background: '#fff',
   // headerBgColor: '#EF7C00',
