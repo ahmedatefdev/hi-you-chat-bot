@@ -4,6 +4,8 @@ import ChatBot from 'react-simple-chatbot';
 // @ts-ignore: Unreachable code error
 import { ThemeProvider } from 'styled-components';
 import { StepsContext } from './MainLayout';
+import bot2 from '../img/icons/006-chat.svg'
+
 const theme = {
   background: '#fff',
   // headerBgColor: '#EF7C00',
@@ -28,6 +30,7 @@ export const ActiveChatBot = ({ containerRef }: Props) => {
 
       <>
         <ChatBot
+          enableSmoothScroll={true}
           steps={steps}
           className="test"
           style={{
@@ -61,6 +64,7 @@ export const ActiveChatBot = ({ containerRef }: Props) => {
             borderTopRightRadius: "0px"
 
           }}
+          botAvatar={bot2}
         />
       </>
 

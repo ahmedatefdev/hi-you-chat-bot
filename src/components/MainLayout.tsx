@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 import { Col, Layout, PageHeader, Row, Spin } from 'antd';
 import { ActiveChatBot } from './ActiveChatBot';
 import ChatBots from './ChatBots';
-import { PersonalitySummary } from '../ChatBotsSteps/PersonalitySummary';
+import { PersonalitySummary } from './Bots/PersonalitySummary/PersonalitySummary';
 
 const { Sider, Content } = Layout;
 export const StepsContext = createContext({ steps: PersonalitySummary });

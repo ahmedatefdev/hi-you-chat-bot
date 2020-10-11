@@ -1,7 +1,7 @@
 import React, { createContext } from 'react'
 import { Menu, Typography } from 'antd'
 import { BookOutlined, MedicineBoxOutlined, SmileOutlined } from '@ant-design/icons'
-import { PersonalitySummary, optionsSteps, } from '../ChatBotsSteps/PersonalitySummary'
+import { PersonalitySummary, optionsSteps, } from './Bots/PersonalitySummary/PersonalitySummary'
 const { Title } = Typography
 interface Props { HandelChangeSteps: (NewSteps: any[]) => void }
 
