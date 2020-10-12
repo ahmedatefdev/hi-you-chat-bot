@@ -1,16 +1,18 @@
-import React, { Props } from 'react';
-import { Col, Layout, Menu, PageHeader, Row, } from 'antd';
-import {
-    WechatOutlined, MedicineBoxOutlined, BookOutlined
-} from '@ant-design/icons';
-import { ActiveChatBot } from './ChatBot';
+import React, { createContext } from 'react';
+import { Col, Layout, PageHeader, Row, Spin } from 'antd';
+import { ActiveChatBot } from './ActiveChatBot';
+import ChatBots from './ChatBots';
+import { PersonalitySummary } from './Bots/PersonalitySummary/PersonalitySummary';
 
-const { Sider, Content, Footer } = Layout;
-
+const { Sider, Content } = Layout;
+export const StepsContext = createContext({ steps: PersonalitySummary });
 export default class SiderDemo extends React.Component {
     state: {
         collapsed: boolean,
-        myRef: null | HTMLDivElement
+        myRef: null | HTMLDivElement,
+        steps: any
+        reload: boolean
+
     };
     myRef: React.RefObject<HTMLDivElement>;
 
@@ -18,8 +20,11 @@ export default class SiderDemo extends React.Component {
         super(props)
         this.myRef = React.createRef<HTMLDivElement>()
         this.state = {
-            collapsed: false, myRef: null
+            collapsed: false, myRef: null, steps: PersonalitySummary
+            , reload: false
         }
+        this.HandelChangeSteps = this.HandelChangeSteps.bind(this)
+
     }
     toggle = () => {
         this.setState({
@@ -33,61 +38,50 @@ export default class SiderDemo extends React.Component {
             myRef: this.myRef.current,
         });
     }
+    HandelChangeSteps(NewSteps: any[]) {
+        if (this.state.reload) return
+        this.setState({ ...this.state, reload: true, })
+        setTimeout(() => {
+            this.setState({ ...this.state, reload: false, steps: NewSteps })
+        }, 1000);
+    }
     bodyStyle = { height: "100vh", overflow: "auto" }
+    backgroundColor = { backgroundColor: "#00796b" }
+    textColor = { color: "#fff" }
     render() {
         return (
 
-            <Layout style={this.bodyStyle}>
-                <Sider
-                    breakpoint="lg"
-                    theme="light"
-                    collapsedWidth="0"
-                    onBreakpoint={broken => {
-                        console.log(broken);
-                    }}
-                    onCollapse={(collapsed, type) => {
-                        console.log(collapsed, type);
-                    }}
-
-                >
-                    <div className="logo" />
-                    <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
-                        <PageHeader
-                            className="site-page-header"
-                            title="Choose Bot"
-                        />
-                        <Menu.Item key="1" icon={<MedicineBoxOutlined />}>
-                            Your health summary
-                            </Menu.Item>
-                        <Menu.Item key="2" icon={<BookOutlined />}>
-                            Find book to read
-                            </Menu.Item>
-                    </Menu>
-                </Sider>
-                <Layout style={{ backgroundColor: "white" }} >
-                    <Row style={{ backgroundColor: "white" }} justify="start" align="middle">
-                        {/* <Col style={{ marginLeft: "2em", textAlign: 'right' }} span={2} >
-                            <div>
-                                <WechatOutlined style={{ fontSize: '4em', color: '#08c' }} />
-                            </div>
-                        </Col> */}
-                        <Col style={{ marginLeft: "2em", backgroundColor: "white", textAlign: "left" }}>
-                            <PageHeader
-                                className="site-page-header "
-                                title="HiYou ChatBot"
-                                subTitle="Created by Ahmed Atef ©2020"
-                            />
-                        </Col>
-
-                    </Row>
-                    <Content style={{ margin: '24px 0px 0', height: "100%" }} >
-                        <div className="site-layout-background" ref={this.myRef} style={{ height: "100%", width: "100%" }} >
-                            <ActiveChatBot containerRef={this.state.myRef} />
-                        </div>
-                    </Content>
-                    {/* <Footer style={{ textAlign: 'center' }}>Created by Ahmed Atef ©2020</Footer> */}
-                </Layout>
-            </Layout >
+            <StepsContext.Provider value={{ steps: this.state.steps }}>
+                <Layout style={this.bodyStyle}>
+                    <Sider
+                        breakpoint="xs"
+                        theme="dark"
+                        style={{ ...this.backgroundColor }}
+                        collapsedWidth="0"
+                    >
+                        <div className="logo" />
+                        <ChatBots loading={this.state.reload} HandelChangeSteps={this.HandelChangeSteps} />
+                    </Sider>
+                    <Layout style={{ backgroundColor: "white" }} >
+                        <Row style={{ backgroundColor: "white" }} justify="start" align="middle">
+                            <Col style={{ marginLeft: "2em", backgroundColor: "white", textAlign: "left" }}>
+                                <PageHeader
+                                    className="site-page-header "
+                                    title="HiYou ChatBot"
+                                    subTitle="Created by Ahmed Atef ©2020"
+                                />
+                            </Col>
+                        </Row>
+                        <Content style={{ margin: '24px 0px 0', height: "100%", backgroundColor: "white" }} >
+                            <Spin spinning={this.state.reload} style={{ height: "100% !important", width: "100% !important" }} size="large">
+                                <div className="site-layout-background" ref={this.myRef} style={{ height: "100%", width: "100%" }} >
+                                    {!this.state.reload && <ActiveChatBot containerRef={this.state.myRef} />}
+                                </div>
+                            </Spin>
+                        </Content>
+                    </Layout>
+                </Layout >
+            </StepsContext.Provider>
         );
     }
 }
