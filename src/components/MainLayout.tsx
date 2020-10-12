@@ -12,6 +12,7 @@ export default class SiderDemo extends React.Component {
         myRef: null | HTMLDivElement,
         steps: any
         reload: boolean
+
     };
     myRef: React.RefObject<HTMLDivElement>;
 
@@ -59,7 +60,7 @@ export default class SiderDemo extends React.Component {
                         collapsedWidth="0"
                     >
                         <div className="logo" />
-                        <ChatBots HandelChangeSteps={this.HandelChangeSteps} />
+                        <ChatBots loading={this.state.reload} HandelChangeSteps={this.HandelChangeSteps} />
                     </Sider>
                     <Layout style={{ backgroundColor: "white" }} >
                         <Row style={{ backgroundColor: "white" }} justify="start" align="middle">
