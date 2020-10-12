@@ -1,7 +1,8 @@
 import React, { } from 'react'
 import { Menu, Typography } from 'antd'
 import { BookOutlined, MedicineBoxOutlined, SmileOutlined } from '@ant-design/icons'
-import { PersonalitySummary, optionsSteps, } from './Bots/PersonalitySummary/PersonalitySummary'
+import { PersonalitySummary } from './Bots/PersonalitySummary/PersonalitySummary'
+import { HealthSteps } from './Bots/HealthSummary/HealthSteps';
 const { Title } = Typography
 interface Props { HandelChangeSteps: (NewSteps: any[]) => void, loading: boolean }
 
@@ -20,11 +21,13 @@ const ChatBots: React.FunctionComponent<Props> = ({ HandelChangeSteps, loading }
                 Summary About You
                             </Menu.Item>
             <Menu.Item key="2" icon={<MedicineBoxOutlined />} onClick={() => {
-                HandelChangeSteps(optionsSteps)
+                HandelChangeSteps(HealthSteps)
             }} disabled={loading}>
                 Your Health State
             </Menu.Item>
-            <Menu.Item key="3" icon={<BookOutlined />} disabled={loading}>
+            <Menu.Item key="3" icon={<BookOutlined />} onClick={() => {
+                HandelChangeSteps(HealthSteps)
+            }} disabled={loading}>
                 Find book You need
             </Menu.Item>
         </Menu >

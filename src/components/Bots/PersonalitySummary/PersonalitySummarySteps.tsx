@@ -23,6 +23,7 @@ export const generalPersonalInfo = (nextTriggerId: string | number | Function): 
     }
   ];
 };
+
 export const characterQuestions = (nextTriggerId: string | number | Function): ChatStep[] => {
   return [
     { id: 6, message: "Now some personal questions", trigger: 7, avatar: bot1 },
@@ -98,7 +99,6 @@ export const FirstThingSees = (nextTriggerId: string | number | Function): ChatS
     },
     { id: 15, asMessage: true, component: <ChatImage src={womanMan} />, trigger: QuestionsIds.womanMan },
     {
-      //! generate deferent id by the gender
       id: QuestionsIds.womanMan,
       options: [
         { value: PhotosOptionsIdsLabels.youngWoman, label: PhotosOptionsIdsLabels.youngWoman, trigger: nextTriggerId },
